@@ -1,0 +1,25 @@
+def main():
+    game = SlidingPuzzle(size=3)
+    game.shuffle_board(50) # 50 hamle karıştır
+    
+    print("--- 3x3 Sliding Puzzle Oyunu ---")
+    print("Kontroller: W (Yukarı), S (Aşağı), A (Sol), D (Sağ), Q (Çıkış)")
+    
+    while True:
+        game.display()
+        
+        if game.is_solved():
+            print("Tebrikler! Kazandınız!")
+            break
+            
+        choice = input("Hamle yapın: ").lower()
+        
+        if choice == 'q':
+            print("Oyun sonlandırıldı.")
+            break
+        
+        if not game.move(choice):
+            print("!!! Geçersiz hamle, lütfen tekrar deneyin.")
+
+if __name__ == "__main__":
+    main()
