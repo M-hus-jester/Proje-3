@@ -1,0 +1,36 @@
+import random
+
+class SlidingPuzzle:
+    def __init__(self, size=3):
+        self.size = size
+        # Hedeflenen (çözülmüş) durum: [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+        self.goal_state = self._generate_board()
+        self.board = [row[:] for row in self.goal_state]
+        self.empty_pos = (size - 1, size - 1) # Boşluğun (0) koordinatı (satır, sütun)
+
+    def _generate_board(self):
+        """Çözülmüş tahtayı oluşturur."""
+        board = []
+        counter = 1
+        for r in range(self.size):
+            row = []
+            for c in range(self.size):
+                if counter < self.size * self.size:
+                    row.append(counter)
+                else:
+                    row.append(0) # Boş hücre
+                counter += 1
+            board.append(row)
+        return board
+
+    def display(self):
+        """Tahtayı ekrana güzelce basar."""
+        print("-" * (self.size * 4 + 1))
+        for row in self.board:
+            print("|", end="")
+            for val in row:
+                if val == 0:
+                    print("   |", end="")
+                else:
+                    print(f" {val:1} |", end="")
+            print("\n" + "-" * (self.size * 4 + 1))
