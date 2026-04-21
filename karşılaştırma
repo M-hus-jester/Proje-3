@@ -1,0 +1,11 @@
+def shuffle_board(self, moves=100):
+        """Tahtayı rastgele karıştırır."""
+        directions = ['w', 's', 'a', 'd']
+        count = 0
+        while count < moves:
+            if self.move(random.choice(directions)):
+                count += 1
+
+    def is_solved(self):
+        """Tahta hedef duruma ulaştı mı?"""
+        return self.board == self.goal_state
