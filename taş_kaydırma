@@ -1,0 +1,29 @@
+def find_empty(self):
+        """Boş hücrenin (0) güncel konumunu bulur."""
+        for r in range(self.size):
+            for c in range(self.size):
+                if self.board[r][c] == 0:
+                    return r, c
+
+    def move(self, direction):
+        """
+        direction: 'w' (yukarı), 's' (aşağı), 'a' (sol), 'd' (sağ)
+        Mantık: Kullanıcı 'w' (yukarı) diyorsa, boşluğun altındaki sayı yukarı çıkar.
+        """
+        r, c = self.find_empty()
+        target_r, target_c = r, c
+
+        if direction == 'w' and r < self.size - 1: # Boşluk aşağı, sayı yukarı
+            target_r += 1
+        elif direction == 's' and r > 0:           # Boşluk yukarı, sayı aşağı
+            target_r -= 1
+        elif direction == 'a' and c < self.size - 1: # Boşluk sağa, sayı sola
+            target_c += 1
+        elif direction == 'd' and c > 0:           # Boşluk sola, sayı sağa
+            target_c -= 1
+        else:
+            return False # Geçersiz hamle
+
+        # Takas (Swap) işlemi
+        self.board[r][c], self.board[target_r][target_c] = self.board[target_r][target_c], self.board[r][c]
+        return True
